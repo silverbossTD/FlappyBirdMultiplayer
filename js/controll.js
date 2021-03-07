@@ -37,6 +37,7 @@ function onpress(evt) {
 			) {
 				pipes.reset();
 				currentstate = states.Splash;
+                currentstate2 = states.Splash;
 				score = 0;
 			}
 			break;

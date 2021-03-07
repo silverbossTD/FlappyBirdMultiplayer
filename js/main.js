@@ -33,6 +33,7 @@ function main(mySide) {
 	ctx = canvas.getContext("2d");
 
 	currentstate = states.Splash;
+    currentstate2 = states.Splash;
 	// append canvas to document
 	document.body.appendChild(canvas);
 
@@ -72,6 +73,7 @@ function run(mySide) {
  */
 function update() {
 	frames++;
+    frames2++;
 
 	if (currentstate !== states.Score) {
 		fgpos = (fgpos - 2) % 14;
@@ -90,10 +92,12 @@ function update() {
 
 function join() {
 	frames++;
+    frames2++;
 
 	if (currentstate !== states.Score) {
 		fgpos = (fgpos - 2) % 14;
-	} else {
+	}
+    else {
 		// set best score to maximum score
 		best = Math.max(best, score);
 		localStorage.setItem("best", best);
