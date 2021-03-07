@@ -138,12 +138,12 @@ function render() {
 	}
 	if (currentstate === states.Score) {
 		// draw gameover text and score board
-		// s_text.GameOver.draw(ctx, width2 - s_text.GameOver.width/2, height-400);
-		// s_score.draw(ctx, width2 - s_score.width/2, height-340);
-		// s_buttons.Ok.draw(ctx, okbtn.x, okbtn.y);
-		// // draw score and best inside the score board
-		// s_numberS.draw(ctx, width2-47, height-304, score, null, 10);
-		// s_numberS.draw(ctx, width2-47, height-262, best, null, 10);
+		s_text.GameOver.draw(ctx, width2 - s_text.GameOver.width/2, height-400);
+		s_score.draw(ctx, width2 - s_score.width/2, height-340);
+		s_buttons.Ok.draw(ctx, okbtn.x, okbtn.y);
+		// draw score and best inside the score board
+		s_numberS.draw(ctx, width2-47, height-304, score, null, 10);
+		s_numberS.draw(ctx, width2-47, height-262, best, null, 10);
 
 	} else {
 		// draw score to top of canvas

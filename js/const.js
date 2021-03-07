@@ -285,6 +285,7 @@ pipes = {
     },
 
     joinChannel: function() {
+        (currentstate2 <= states.Score && mySide === 1) && this.auto();
 		for (var i = 0, len = this._pipes.length; i < len; i++) {
 			var p = this._pipes[i];
 
@@ -319,6 +320,21 @@ pipes = {
 				len--;
 			}
 		}
+    },
+
+    auto: function() {
+        if (frames % 100 === 0) {
+            // calculate y position
+            var _y = height - (s_pipeSouth.height+s_fg.height+120+200*Math.random());
+            // create and push pipe to array
+            const newPipe = {
+                x: 500,
+                y: _y,
+                width: s_pipeSouth.width,
+                height: s_pipeSouth.height
+            }
+            this._pipes.push(newPipe);
+        }
     },
 
 	/**
