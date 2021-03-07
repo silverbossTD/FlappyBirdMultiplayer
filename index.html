@@ -7,28 +7,35 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes">
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="style.css">
 
 	<title>FlappyJS</title>
 </head>
-<body>
+<body style="display: none">
 
-<div class="menuGame">
-	<input type="text" name="name" id="username" value="Silverboss">
-	<h3 id="codeChannel"></h3>
-	<button type="button" id="hostGame">Host the game</button>
+<div class="logo">
+	<img src="./res/logo.png" height="130">
+</div>
 
-	<hr />
+<div id="app">
 
-	<input type="text" name="name" id="username" value="ThanhDuy">
-	<input type="text" name="codeGame" id="codeGame" placeholder="Code...">
-	<button type="button" id="joinGame">Join the game</button>
+	<div class="menuGame">
+		<span type="button" name="button" id="startBtn"><img src="./res/startBtn.png" height="100" /></span> <br />
+		<span type="button" name="button" id="hostBtn"><img src="./res/hostBtn.png" height="100" /></span> <br />
+		<span type="button" name="button" id="joinBtn"><img src="./res/joinBtn.png" height="100" /></span>
+	</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.27.4.min.js"></script>
 
 <script src="js/HTMLbuilder.js" charset="utf-8"></script>
+
+<!-- Html code -->
+
+<script src="js/html.js"></script>
 
 <!-- Game code -->
 
@@ -43,6 +50,12 @@
 <script src="server/joinChannel.js" charset="utf-8"></script>
 <script src="server/hostChannel.js" charset="utf-8"></script>
 <script src="server/startGame.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+     $(document).ready(function(){
+         $('body').fadeIn();
+     })
+</script>
 
 </body>
 </html>

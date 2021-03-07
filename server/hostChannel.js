@@ -11,18 +11,20 @@ function generateKey(length = 4, specificKey = null)
     return (key)
 }
 
-let code = generateKey(4)
+function hostGame() {
+    let code = generateKey(4)
 
-$('#codeChannel').html(code);
+    $('#codeChannel').html(code);
 
-$('#hostGame')[0].addEventListener('click', (e) => {
-    IS_ONLINE = true;
-    channel = code;
-    mySide = 0;
-    console.log('Waiting on player...', [channel]);
+    $('#hostGame')[0].addEventListener('click', (e) => {
+        IS_ONLINE = true;
+        channel = code;
+        mySide = 0;
+        $('#status').html('Waiting on player...');
 
-    pubnub.subscribe({
-        channels: [channel],
-        withPresence: true
+        pubnub.subscribe({
+            channels: [channel],
+            withPresence: true
+        });
     });
-});
+}

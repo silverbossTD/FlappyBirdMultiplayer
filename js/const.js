@@ -147,6 +147,10 @@ bird2 = {
 	 * Update sprite animation and position of bird
 	 */
 	update: function() {
+		if (bird2.y >= 358) {
+			bird2.x -= 2;
+			if (bird2.x <= -100) bird2.x = -100;
+		}
         // make sure animation updates and plays faster in gamestate
 		var n = currentstate2 === states.Splash ? 10 : 5;
 		this.frame += frames2 % n === 0 ? 1 : 0;
