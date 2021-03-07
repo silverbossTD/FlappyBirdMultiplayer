@@ -5,7 +5,8 @@
  * @param  {MouseEvent/TouchEvent} evt tho on press event
  */
 function onpress(evt) {
-
+    if (!readyStart) return;
+    
 	switch (currentstate) {
 
 		// change state and update bird velocity
