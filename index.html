@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+
+	<title>FlappyJS</title>
+
+	<style>
+	canvas {
+		display: block;
+		position: absolute;
+		margin: auto;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+	</style>
+</head>
+<body>
+
+<div class="menuGame">
+	<input type="text" name="name" id="username" value="Silverboss">
+	<h3 id="codeChannel"></h3>
+	<button type="button" id="hostGame">Host the game</button>
+
+	<hr />
+
+	<input type="text" name="name" id="username" value="ThanhDuy">
+	<input type="text" name="codeGame" id="codeGame" placeholder="Code...">
+	<button type="button" id="joinGame">Join the game</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.27.4.min.js"></script>
+
+<script src="js/HTMLbuilder.js" charset="utf-8"></script>
+
+<!-- Game code -->
+
+<script src="js/sprite.js"></script>
+<script src="js/const.js"></script>
+<script src="js/controll.js"></script>
+<script src="js/main.js" charset="utf-8"></script>
+
+<!-- Server code -->
+
+<script src="server/server.js" charset="utf-8"></script>
+<script src="server/joinChannel.js" charset="utf-8"></script>
+<script src="server/hostChannel.js" charset="utf-8"></script>
+<script src="server/startGame.js" charset="utf-8"></script>
+
+</body>
+</html>
