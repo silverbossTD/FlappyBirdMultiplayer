@@ -19,7 +19,8 @@ function main(mySide) {
 
 	// listen for input event
 	document.addEventListener(evt, onpress);
-    document.addEventListener('keydown', (e) => {
+	document.addEventListener("ontouchstart", onpress);
+    	document.addEventListener('keydown', (e) => {
         if (e.keyCode === 32) {
             onpress();
         }
