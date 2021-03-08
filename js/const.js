@@ -147,7 +147,7 @@ bird2 = {
 	 * Update sprite animation and position of bird
 	 */
 	update: function() {
-		if (currentstate2 <= states.Score && IS_ONLINE) {
+		if (bird2.y >= 358 && currentstate2 <= states.Score && IS_ONLINE) {
 			bird2.x -= 2;
 			if (bird2.x <= -100) bird2.x = -100;
 		}
