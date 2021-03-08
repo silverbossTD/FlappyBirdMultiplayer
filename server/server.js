@@ -18,6 +18,8 @@ pubnub.addListener({
         }
         else if (event.message.type == "startingInfo") {
             IS_ONLINE = true;
+            // createStats();
+            // addName(event.message.name);
             if (uuid != event.message.sender) {
                 myOpponent = event.message.name;
                 if (event.message.content != -1) { //if opponent has side
@@ -42,6 +44,14 @@ pubnub.addListener({
                 bird2.jump();
             }
         }
+        else if (event.message.type == "playerDeath") {
+            if (uuid != event.message.sender) {
+                opponentDeath = true;
+            }
+            if (youDeath && opponentDeath) {
+                $('#stats').fadeIn();
+            }
+        }
     }
 });
 
@@ -50,7 +60,7 @@ function send(channel, type, content)
     if (IS_ONLINE) {
         pubnub.publish({
             channel: channel,
-            message: { "sender": uuid, "type": type, "content": content, "name": $('#username_input').val() }
+            message: { "sender": uuid, "type": type, "content": content, "name": $('#username').val() }
         }, function (status, response) {
             //Handle error here
             if (status.error) {

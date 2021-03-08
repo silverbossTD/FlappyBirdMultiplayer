@@ -200,7 +200,7 @@ bird2 = {
 	 *                                        drawing
 	 */
 	draw: function(ctx) {
-        ctx.globalAlpha = 0.5;
+        ctx.globalAlpha = 0.2;
 		ctx.save();
 		// translate and rotate ctx coordinatesystem
 		ctx.translate(this.x, this.y);

@@ -47,8 +47,12 @@ function backBtn(builder, element) {
     builder
         .add('<span id="button_back"><img src="./res/startBtn.png" height="100" /></span>')
         .addHook(() => $('#button_back').click(() => {
-            $(element).remove();
-            $('#button_back').remove();
-            $('.menuGame').css('display', 'block');
+            $(element).fadeOut();
+            $('#button_back').fadeOut();
+            setTimeout(() => {
+                $('#button_back').remove();
+                $('.menuGame').fadeIn();
+                $(element).remove();
+            }, 500);
         }));
 }

@@ -4,7 +4,6 @@
     color: white;
 }
 body {
-  image-rendering: pixelated;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -57,6 +56,10 @@ img {
     image-rendering: pixelated;
 }
 
+li {
+    list-style-type: none;
+}
+
 #startBtn, #hostBtn, #joinBtn {
     animation: bounce 3s infinite;
 }
@@ -68,6 +71,16 @@ img {
 
 #codeChannel {
     margin: 5px;
+}
+
+#stats {
+    display: none;
+    border: 1px solid black;
+    background: #c4be7b;
+    z-index: 99;
+    width: 300px;
+    height: 200px;
+    text-align: center;
 }
 
 .logo {
