@@ -302,7 +302,9 @@ pipes = {
     },
 
     joinChannel: function() {
-        (bird2.y >= 358 && currentstate2 <= states.Score && IS_ONLINE && mySide === 1) && this.auto();
+        if (bird2.y >= 358 && mySide === 1) {
+	    	this.auto();
+	    }
 		for (var i = 0, len = this._pipes.length; i < len; i++) {
 			var p = this._pipes[i];
 
