@@ -93,7 +93,6 @@ function update() {
 
 function join() {
 	frames++;
-    frames2++;
 
 	if (currentstate !== states.Score) {
 		fgpos = (fgpos - 2) % 14;
@@ -136,7 +135,7 @@ function render() {
 		s_splash.draw(ctx, width2 - s_splash.width/2, height - 300);
 		s_text.GetReady.draw(ctx, width2 - s_text.GetReady.width/2, height-380);
 	}
-    
+
 	if (currentstate === states.Score && !IS_ONLINE) {
 		// draw gameover text and score board
 		s_text.GameOver.draw(ctx, width2 - s_text.GameOver.width/2, height-400);

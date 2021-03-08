@@ -12,6 +12,7 @@ fgpos = 0,
 frames = 0,
 frames2 = 0,
 score = 0,
+speed = 2,
 best = localStorage.getItem("best") || 0,
 
 // State vars //
@@ -148,8 +149,20 @@ bird2 = {
 	 */
 	update: function() {
 		if (bird2.y >= 358 && currentstate2 <= states.Score && IS_ONLINE) {
-			bird2.x -= 2;
+			bird2.x -= speed;
 			if (bird2.x <= -100) bird2.x = -100;
+		}
+		if (bird.y >= 358 && currentstate <= states.Score && IS_ONLINE) {
+			bird2.x += speed;
+			if (bird2.x >= 400) bird2.x = 400;
+		}
+		if (
+			bird.y >= 358 &&
+			currentstate <= states.Score &&
+			bird2.y >= 358 &&
+			currentstate2 <= states.Score &&
+			IS_ONLINE) {
+			speed = 0;
 		}
         // make sure animation updates and plays faster in gamestate
 		var n = currentstate2 === states.Splash ? 10 : 5;
