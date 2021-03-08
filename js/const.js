@@ -147,7 +147,7 @@ bird2 = {
 	 * Update sprite animation and position of bird
 	 */
 	update: function() {
-		if (bird2.y >= 358) {
+		if (currentstate2 <= states.Score && IS_ONLINE) {
 			bird2.x -= 2;
 			if (bird2.x <= -100) bird2.x = -100;
 		}
@@ -289,7 +289,7 @@ pipes = {
     },
 
     joinChannel: function() {
-        (bird2.y >= 358 && mySide === 1) && this.auto();
+        (currentstate2 <= states.Score && IS_ONLINE && mySide === 1) && this.auto();
 		for (var i = 0, len = this._pipes.length; i < len; i++) {
 			var p = this._pipes[i];
 
