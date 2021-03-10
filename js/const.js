@@ -10,7 +10,6 @@ height,
 
 fgpos = 0,
 frames = 0,
-frames2 = 0,
 score = 0,
 speed = 2,
 best = localStorage.getItem("best") || 0,
@@ -166,14 +165,14 @@ bird2 = {
 		}
         // make sure animation updates and plays faster in gamestate
 		var n = currentstate2 === states.Splash ? 10 : 5;
-		this.frame += frames2 % n === 0 ? 1 : 0;
+		this.frame += frames % n === 0 ? 1 : 0;
 		this.frame %= this.animation.length;
 
 		// in splash state make bird hover up and down and set
 		// rotation to zero
 		if (currentstate2 == states.Splash) {
 
-			this.y = height - 280 + 5*Math.cos(frames2/10);
+			this.y = height - 280 + 5*Math.cos(frames/10);
 			this.rotation = 0;
 
 		} else { // game and score state //
