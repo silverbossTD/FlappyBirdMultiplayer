@@ -74,7 +74,6 @@ function run(mySide) {
  */
 function update() {
 	frames++;
-    frames2++;
 
 	if (currentstate !== states.Score) {
 		fgpos = (fgpos - 2) % 14;
@@ -88,7 +87,7 @@ function update() {
 	}
 
 	bird.update();
-    bird2.update();
+    	(IS_ONLINE) && bird2.update();
 }
 
 function join() {
@@ -107,7 +106,7 @@ function join() {
 	}
 
 	bird.update();
-    bird2.update();
+    	(IS_ONLINE) && bird2.update();
 }
 
 /**
@@ -122,7 +121,7 @@ function render() {
 
 	pipes.draw(ctx);
 	bird.draw(ctx);
-    bird2.draw(ctx);
+	(IS_ONLINE) && bird2.draw(ctx);;
 
 	// draw forground sprites
 	s_fg.draw(ctx, fgpos, height - s_fg.height);
