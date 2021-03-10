@@ -121,7 +121,7 @@ function render() {
 
 	pipes.draw(ctx);
 	bird.draw(ctx);
-	(IS_ONLINE) && bird2.draw(ctx);;
+	(IS_ONLINE) && bird2.draw(ctx);
 
 	// draw forground sprites
 	s_fg.draw(ctx, fgpos, height - s_fg.height);
