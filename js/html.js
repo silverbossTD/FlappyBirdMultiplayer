@@ -56,10 +56,11 @@ function createStats() {
         .add(`<span id="button_back${ID}"><img src="./res/startBtn.png" height="100" /></span>`)
         .addHook(() => $(`#button_back${ID}`).click(() => {
             youDeath = false;
+	    IS_ONLINE = false;
             pipes.reset();
-				    currentstate = states.Splash;
+	    currentstate = states.Splash;
             currentstate2 = states.Splash;
-			      score = 0;
+	    score = 0;
             $(`#button_back${ID}`).remove();
             $('#statsWindow').remove();
             $('#app').fadeIn();
