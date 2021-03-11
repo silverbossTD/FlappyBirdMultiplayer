@@ -42,30 +42,6 @@ function onpress(evt) {
 				score = 0;
 			}
 			
-			document.addEventListener("touchstart", (e) => {
-				pipes.reset();
-				currentstate = states.Splash;
-                		currentstate2 = states.Splash;
-				score = 0;
-			});
-			
-			document.addEventListener("click", (e) => {
-				pipes.reset();
-				currentstate = states.Splash;
-                		currentstate2 = states.Splash;
-				score = 0;
-			});
-			
-			document.addEventListener("keydown", (e) => {
-				if (e.keyCode === 32) {
-				    pipes.reset();
-				    currentstate = states.Splash;
-                	            currentstate2 = states.Splash;
-			            score = 0;
-				}
-			});
-
-			
 			break;
 
 	}
