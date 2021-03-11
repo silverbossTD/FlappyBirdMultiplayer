@@ -27,38 +27,96 @@ states = {
 /**
  * Ok button initiated in main()
  */
-okbtn,
+okbtn;
 
 /**
  * The bird
  */
-bird = {
 
-	x: 60,
-	y: 0,
+class Bird {
+	constructor(birdName) {
+		this.birdName = birdName;
+		this.x = 60;
+		this.y = 0;
 
-	frame: 0,
-	velocity: 0,
-	animation: [0, 1, 2, 1], // animation sequence
+		this.frame = 0;
+		this.velocity = 0;
+		this.animation = [0, 1, 2, 1]; // animation sequence
 
-	rotation: 0,
-	radius: 12,
+		this.rotation = 0;
+		this.radius = 12;
 
-	gravity: 0.25,
-	_jump: 4.6,
-
-	/**
-	 * Makes the bird "flap" and jump
-	 */
-	jump: function() {
+		this.gravity = 0.25;
+		this._jump = 4.6;
+	}
+	jump() {
 		this.velocity = -this._jump;
-	},
+		if (this.birdName == 'bird2') {
+			currentstate2 += this.velocity;
+		}
+	}
 
-	/**
-	 * Update sprite animation and position of bird
-	 */
-	update: function() {
-		// make sure animation updates and plays faster in gamestate
+	update() {
+
+		if (this.birdName == 'bird2') {
+			if (bird2.y >= 358 && currentstate2 <= states.Score && IS_ONLINE) {
+				bird2.x -= speed;
+				if (bird2.x <= -100) bird2.x = -100;
+			}
+			if (bird.y >= 358 && currentstate <= states.Score && IS_ONLINE) {
+				bird2.x += speed;
+				if (bird2.x >= 400) bird2.x = 400;
+			}
+			if (
+				bird.y >= 358 &&
+				currentstate <= states.Score &&
+				bird2.y >= 358 &&
+				currentstate2 <= states.Score &&
+				IS_ONLINE) {
+				speed = 0;
+			}
+	        // make sure animation updates and plays faster in gamestate
+			var n = currentstate2 === states.Splash ? 10 : 5;
+			this.frame += frames % n === 0 ? 1 : 0;
+			this.frame %= this.animation.length;
+
+			// in splash state make bird hover up and down and set
+			// rotation to zero
+			if (currentstate2 == states.Splash) {
+
+				this.y = height - 280 + 5*Math.cos(frames/10);
+				this.rotation = 0;
+
+			} else { // game and score state //
+
+				this.velocity += this.gravity;
+				this.y += this.velocity;
+
+				// change to the score state when bird touches the ground
+				if (this.y >= height - s_fg.height-10) {
+					this.y = height - s_fg.height-10;
+					if (currentstate2 === states.Game) {
+						currentstate2 = states.Score;
+					}
+					// sets velocity to jump speed for correct rotation
+					this.velocity = this._jump;
+				}
+
+				// when bird lack upward momentum increment the rotation
+				// angle
+				if (this.velocity >= this._jump) {
+
+					this.frame = 1;
+					this.rotation = Math.min(Math.PI/2, this.rotation + 0.3);
+
+				} else {
+
+					this.rotation = -0.3;
+
+				}
+			}
+		} else {
+
 		var n = currentstate === states.Splash ? 10 : 5;
 		this.frame += frames % n === 0 ? 1 : 0;
 		this.frame %= this.animation.length;
@@ -71,34 +129,34 @@ bird = {
 			this.rotation = 0;
 
 		} else { // game and score state //
+				this.velocity += this.gravity;
+				this.y += this.velocity;
 
-			this.velocity += this.gravity;
-			this.y += this.velocity;
-
-			// change to the score state when bird touches the ground
-			if (this.y >= height - s_fg.height-10) {
-				this.y = height - s_fg.height-10;
-				if (currentstate === states.Game) {
-					currentstate = states.Score;
+				// change to the score state when bird touches the ground
+				if (this.y >= height - s_fg.height-10) {
+					this.y = height - s_fg.height-10;
+					if (currentstate === states.Game) {
+						currentstate = states.Score;
+					}
+					// sets velocity to jump speed for correct rotation
+					this.velocity = this._jump;
 				}
-				// sets velocity to jump speed for correct rotation
-				this.velocity = this._jump;
-			}
 
-			// when bird lack upward momentum increment the rotation
-			// angle
-			if (this.velocity >= this._jump) {
+				// when bird lack upward momentum increment the rotation
+				// angle
+				if (this.velocity >= this._jump) {
 
-				this.frame = 1;
-				this.rotation = Math.min(Math.PI/2, this.rotation + 0.3);
+					this.frame = 1;
+					this.rotation = Math.min(Math.PI/2, this.rotation + 0.3);
 
-			} else {
+				} else {
 
-				this.rotation = -0.3;
+					this.rotation = -0.3;
 
+				}
 			}
 		}
-	},
+	}
 
 	/**
 	 * Draws bird with rotation to canvas ctx
@@ -106,146 +164,40 @@ bird = {
 	 * @param  {CanvasRenderingContext2D} ctx the context used for
 	 *                                        drawing
 	 */
-	draw: function(ctx) {
+
+	 draw(ctx) {
+		if (this.birdName == 'bird2') ctx.globalAlpha = 0.2;
+
 		ctx.save();
-		// translate and rotate ctx coordinatesystem
-		ctx.translate(this.x, this.y);
-		ctx.rotate(this.rotation);
+ 		// translate and rotate ctx coordinatesystem
+ 		ctx.translate(this.x, this.y);
+ 		ctx.rotate(this.rotation);
 
-		var n = this.animation[this.frame];
-		// draws the bird with center in origo
-		s_bird[n].draw(ctx, -s_bird[n].width/2, -s_bird[n].height/2);
+ 		var n = this.animation[this.frame];
+ 		// draws the bird with center in origo
+ 		s_bird[n].draw(ctx, -s_bird[n].width/2, -s_bird[n].height/2);
 
-		ctx.restore();
-	}
-},
+ 		ctx.restore();
 
-bird2 = {
-
-	x: 60,
-	y: 0,
-
-	frame: 0,
-	velocity: 0,
-	animation: [0, 1, 2, 1], // animation sequence
-
-	rotation: 0,
-	radius: 12,
-
-	gravity: 0.25,
-	_jump: 4.6,
-
-	/**
-	 * Makes the bird "flap" and jump
-	 */
-	jump: function() {
-		this.velocity = -this._jump;
-        currentstate2 += this.velocity;
-	},
-
-	/**
-	 * Update sprite animation and position of bird
-	 */
-	update: function() {
-		if (bird2.y >= 358 && currentstate2 <= states.Score && IS_ONLINE) {
-			bird2.x -= speed;
-			if (bird2.x <= -100) bird2.x = -100;
-		}
-		if (bird.y >= 358 && currentstate <= states.Score && IS_ONLINE) {
-			bird2.x += speed;
-			if (bird2.x >= 400) bird2.x = 400;
-		}
-		if (
-			bird.y >= 358 &&
-			currentstate <= states.Score &&
-			bird2.y >= 358 &&
-			currentstate2 <= states.Score &&
-			IS_ONLINE) {
-			speed = 0;
-		}
-        // make sure animation updates and plays faster in gamestate
-		var n = currentstate2 === states.Splash ? 10 : 5;
-		this.frame += frames % n === 0 ? 1 : 0;
-		this.frame %= this.animation.length;
-
-		// in splash state make bird hover up and down and set
-		// rotation to zero
-		if (currentstate2 == states.Splash) {
-
-			this.y = height - 280 + 5*Math.cos(frames/10);
-			this.rotation = 0;
-
-		} else { // game and score state //
-
-			this.velocity += this.gravity;
-			this.y += this.velocity;
-
-			// change to the score state when bird touches the ground
-			if (this.y >= height - s_fg.height-10) {
-				this.y = height - s_fg.height-10;
-				if (currentstate2 === states.Game) {
-					currentstate2 = states.Score;
-				}
-				// sets velocity to jump speed for correct rotation
-				this.velocity = this._jump;
-			}
-
-			// when bird lack upward momentum increment the rotation
-			// angle
-			if (this.velocity >= this._jump) {
-
-				this.frame = 1;
-				this.rotation = Math.min(Math.PI/2, this.rotation + 0.3);
-
-			} else {
-
-				this.rotation = -0.3;
-
-			}
-		}
-	},
-
-	/**
-	 * Draws bird with rotation to canvas ctx
-	 *
-	 * @param  {CanvasRenderingContext2D} ctx the context used for
-	 *                                        drawing
-	 */
-	draw: function(ctx) {
-        ctx.globalAlpha = 0.2;
-		ctx.save();
-		// translate and rotate ctx coordinatesystem
-		ctx.translate(this.x, this.y);
-		ctx.rotate(this.rotation);
-
-		var n = this.animation[this.frame];
-		// draws the bird with center in origo
-		s_bird[n].draw(ctx, -s_bird[n].width/2, -s_bird[n].height/2);
-
-		ctx.restore();
-        ctx.globalAlpha = 1;
-	}
-},
+		if (this.birdName == 'bird2') ctx.globalAlpha = 1;
+	 }
+}
 
 /**
  * The pipes
  */
-pipes = {
 
-	_pipes: [],
-	// padding: 80, // TODO: Implement paddle variable
-
-	/**
-	 * Empty pipes array
-	 */
-	reset: function() {
+class Pipes {
+	constructor() {
 		this._pipes = [];
-	},
+		// padding: 80, // TODO: Implement paddle variable
+	}
 
-	/**
-	 * Create, push and update all pipes in pipe array
-	 */
-	update: function() {
+	reset() {
+		this._pipes = [];
+	}
+
+	update() {
 		// add new pipe each 100 frames
 		if (frames % 100 === 0 && currentstate > 0) {
 			// calculate y position
@@ -294,14 +246,14 @@ pipes = {
 				len--;
 			}
 		}
-	},
+	}
 
-    addPipe: function(pipe) {
-        this._pipes.push(pipe);
-    },
+	addPipe(pipe) {
+		this._pipes.push(pipe);
+	}
 
-    joinChannel: function() {
-        if (bird2.y >= 358 && mySide === 1) {
+	joinChannel() {
+		if (bird2.y >= 358 && mySide === 1) {
 	    	this.auto();
 	    }
 		for (var i = 0, len = this._pipes.length; i < len; i++) {
@@ -338,10 +290,10 @@ pipes = {
 				len--;
 			}
 		}
-    },
+	}
 
-    auto: function() {
-        if (frames % 100 === 0) {
+	auto() {
+		if (frames % 100 === 0) {
             // calculate y position
             var _y = height - (s_pipeSouth.height+s_fg.height+120+200*Math.random());
             // create and push pipe to array
@@ -353,7 +305,7 @@ pipes = {
             }
             this._pipes.push(newPipe);
         }
-    },
+	}
 
 	/**
 	 * Draw all pipes to canvas context.
@@ -361,11 +313,18 @@ pipes = {
 	 * @param  {CanvasRenderingContext2D} ctx the context used for
 	 *                                        drawing
 	 */
-	draw: function(ctx) {
-		for (var i = 0, len = this._pipes.length; i < len; i++) {
-			var p = this._pipes[i];
-			s_pipeSouth.draw(ctx, p.x, p.y);
-			s_pipeNorth.draw(ctx, p.x, p.y+80+p.height);
-		}
-	}
-};
+
+	 draw(ctx) {
+		 for (var i = 0, len = this._pipes.length; i < len; i++) {
+ 			var p = this._pipes[i];
+ 			s_pipeSouth.draw(ctx, p.x, p.y);
+ 			s_pipeNorth.draw(ctx, p.x, p.y+80+p.height);
+ 		}
+	 }
+}
+
+const bird = new Bird('bird');
+
+const bird2 = new Bird('bird2');
+
+const pipes = new Pipes();
