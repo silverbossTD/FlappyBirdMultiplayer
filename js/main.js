@@ -6,16 +6,10 @@ function main(mySide) {
 	// create canvas and set width/height
 	canvas = document.createElement("canvas");
 
-	width = window.innerWidth;
-	height = window.innerHeight;
+	width = 400;
+	height = 530;
 
 	var evt = "touchstart";
-	if (width >= 500) {
-		width  = 320;
-		height = 480;
-		canvas.style.border = "1px solid #000";
-		evt = "mousedown";
-	}
 
 	// listen for input event
 	document.addEventListener(evt, onpress);
