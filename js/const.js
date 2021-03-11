@@ -137,6 +137,7 @@ class Bird {
 					this.y = height - s_fg.height-10;
 					if (currentstate === states.Game) {
 						currentstate = states.Score;
+						setTimeout(() => youDeath = true, 3000);
 					}
 					// sets velocity to jump speed for correct rotation
 					this.velocity = this._jump;
@@ -217,7 +218,10 @@ class Pipes {
 
 			if (i === 0) {
 
-				score += p.x === bird.x ? 1 : 0;
+				if (p.x === bird.x) {
+					score++;
+					send(channel, 'plusPoint', score);
+				}
 
 				// collision check, calculates x/y difference and
 				// use normal vector length calculation to determine
@@ -236,6 +240,7 @@ class Pipes {
 				// determine intersection
 				if (r > d1 || r > d2) {
 					currentstate = states.Score;
+					setTimeout(() => youDeath = true, 3000);
 				}
 			}
 			// move pipe and remove if outside of canvas
@@ -261,7 +266,10 @@ class Pipes {
 
 			if (i === 0) {
 
-				score += p.x === bird.x ? 1 : 0;
+				if (p.x === bird.x) {
+					score++;
+					send(channel, 'plusPoint', score);
+				}
 
 				// collision check, calculates x/y difference and
 				// use normal vector length calculation to determine
@@ -280,6 +288,7 @@ class Pipes {
 				// determine intersection
 				if (r > d1 || r > d2) {
 					currentstate = states.Score;
+					setTimeout(() => youDeath = true, 3000);
 				}
 			}
 			// move pipe and remove if outside of canvas

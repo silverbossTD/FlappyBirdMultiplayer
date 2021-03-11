@@ -73,16 +73,6 @@ li {
     margin: 5px;
 }
 
-#stats {
-    display: none;
-    border: 1px solid black;
-    background: #c4be7b;
-    z-index: 99;
-    width: 300px;
-    height: 200px;
-    text-align: center;
-}
-
 .logo {
     position: absolute;
     top: 0px;

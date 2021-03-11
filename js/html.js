@@ -1,3 +1,7 @@
+const uniqueID = function () {
+  return '_' + Math.random().toString(36).substr(2, 9);
+};
+
 $('#startBtn').click(() => {
     main(0);
 });
@@ -28,7 +32,7 @@ $('#joinBtn').click(() => {
     builder
         .add('<div id="joinWindow" style="display: none">')
         .add('<h1>Join Game</h1>')
-        .add('<input type="text" name="name" id="username" value="Silverboss" /> <br/>')
+        .add('<input type="text" name="name" id="username" value="ThanhDuy" /> <br/>')
         .add('<input type="text" id="codeGame" placeholder="Code..." /> <br/>')
         .add('<button type="button" id="joinGame">Join the game</button>')
         .add('<h2 id="status" style="text-align: center; color: black"></h2>')
@@ -42,15 +46,32 @@ $('#joinBtn').click(() => {
     $('#joinWindow').fadeIn();
 });
 
+function createStats() {
+    const ID = uniqueID();
+    const builder = new HTMLBuilder()
+    builder
+        .add('<div id="statsWindow" style="display: none">')
+        .add('<h1>Stats Game</h1>')
+        .add('</div>')
+        .add(`<span id="button_back${ID}"><img src="./res/startBtn.png" height="100" /></span>`)
+        .addHook(() => $(`#button_back${ID}`).click(() => {
+            $(`#button_back${ID}`).remove();
+            $('#statsWindow').remove();
+            $('#app').fadeIn();
+        }));
+
+    builder.appendInto(document.body);
+}
 
 function backBtn(builder, element) {
+    const ID = uniqueID();
     builder
-        .add('<span id="button_back"><img src="./res/startBtn.png" height="100" /></span>')
-        .addHook(() => $('#button_back').click(() => {
+        .add(`<span id="button_back${ID}"><img src="./res/startBtn.png" height="100" /></span>`)
+        .addHook(() => $(`#button_back${ID}`).click(() => {
             $(element).fadeOut();
-            $('#button_back').fadeOut();
+            $(`#button_back${ID}`).fadeOut();
             setTimeout(() => {
-                $('#button_back').remove();
+                $(`#button_back${ID}`).remove();
                 $('.menuGame').fadeIn();
                 $(element).remove();
             }, 500);

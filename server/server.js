@@ -15,11 +15,11 @@ pubnub.addListener({
         if (event.message.type == 'start') {
             console.log(event.message);
             send(event.channel, "startingInfo", mySide);
+            createStats();
         }
         else if (event.message.type == "startingInfo") {
             IS_ONLINE = true;
-            // createStats();
-            // addName(event.message.name);
+            addName(event.message.name);
             if (uuid != event.message.sender) {
                 myOpponent = event.message.name;
                 if (event.message.content != -1) { //if opponent has side
@@ -29,7 +29,7 @@ pubnub.addListener({
                         mySide = 0;
                     }
                 }
-                $('.menuGame').empty();
+                $('.menuGame').fadeOut();
                 startGame2(mySide, event.channel);
             }
         }
@@ -44,13 +44,13 @@ pubnub.addListener({
                 bird2.jump();
             }
         }
-        else if (event.message.type == "playerDeath") {
+        else if (event.message.type == "plusPoint") {
             if (uuid != event.message.sender) {
-                opponentDeath = true;
+                opponentScore++;
+                $(`#${event.message.name}Score`).html(`${event.message.name}: ${opponentScore}`);
+                return;
             }
-            if (youDeath && opponentDeath) {
-                $('#stats').fadeIn();
-            }
+            $(`#${$('#username').val()}Score`).html(`${$('#username').val()}: ${score}`);
         }
     }
 });

@@ -62,6 +62,11 @@ function main(mySide) {
 
 function run(mySide) {
 	var loop = function() {
+        if (youDeath && IS_ONLINE) {
+            $('canvas').remove();
+            $('#statsWindow').fadeIn();
+            return;
+        }
 		(mySide === 0) ? update() : join();
 		render();
 		window.requestAnimationFrame(loop, canvas);
@@ -87,7 +92,7 @@ function update() {
 	}
 
 	bird.update();
-    	(IS_ONLINE) && bird2.update();
+    (IS_ONLINE) && bird2.update();
 }
 
 function join() {
@@ -106,7 +111,7 @@ function join() {
 	}
 
 	bird.update();
-    	(IS_ONLINE) && bird2.update();
+    (IS_ONLINE) && bird2.update();
 }
 
 /**

@@ -1,7 +1,7 @@
 /* Start game 2 players */
 let readyStart = false;
 let youDeath = false;
-let opponentDeath = false;
+let opponentScore = 0;
 
 function startGame2(mySide, channel) {
     $('#app').css('display', 'none');
@@ -15,8 +15,8 @@ function startGame2(mySide, channel) {
 function addName(playerName) {
     const builder = new HTMLBuilder()
     builder
-        .add(`<li id="${playerName}" class="playerName">`)
-        .add(`${playerName}: <span id="${playerName}Points">0</span>`)
-        .add(`</li>`)
-        .appendInto('#stats');
+        .add(`<div id="${playerName}Stats">`)
+        .add(`<h1 id="${playerName}Score">${playerName}: 0</h1>`)
+        .add(`</div>`)
+        .appendInto('#statsWindow');
 }
