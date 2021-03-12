@@ -67,6 +67,7 @@ function createStats() {
         .add('</div>')
         .add(`<span id="button_back${ID}"><img src="./res/startBtn.png" height="100" /></span>`)
         .addHook(() => $(`#button_back${ID}`).click(() => {
+	    reset();
             $(`#button_back${ID}`).remove();
             $('#statsWindow').remove();
             $('#app').fadeIn();

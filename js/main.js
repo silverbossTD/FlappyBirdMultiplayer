@@ -9,13 +9,11 @@ function main(mySide) {
 	width = 400;
 	height = 530;
 
-	var evt = "touchstart";
 	canvas.style.border = "1px solid #000";
-	evt = "mousedown";
 
 	// listen for input event
-	document.addEventListener(evt, onpress);
-	document.addEventListener("ontouchstart", onpress);
+	document.addEventListener("touchstart", onpress);
+	document.addEventListener("mousedown", onpress);
     	document.addEventListener('keydown', (e) => {
         if (e.keyCode === 32) {
             onpress();
