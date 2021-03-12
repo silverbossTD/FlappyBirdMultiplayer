@@ -2,6 +2,18 @@ const uniqueID = function () {
   return '_' + Math.random().toString(36).substr(2, 9);
 };
 
+function reset() {
+    youDeath = false;
+    readyStart = false;
+    IS_ONLINE = false;
+    pipes.reset();
+    currentstate = states.Splash;
+    currentstate2 = states.Splash;
+    bird2.x = 60;
+    bird.x = 60;
+    score = 0;
+}
+
 $('#startBtn').click(() => {
     main(0);
 });
@@ -55,15 +67,10 @@ function createStats() {
         .add('</div>')
         .add(`<span id="button_back${ID}"><img src="./res/startBtn.png" height="100" /></span>`)
         .addHook(() => $(`#button_back${ID}`).click(() => {
-            youDeath = false;
-	    IS_ONLINE = false;
-            pipes.reset();
-	    currentstate = states.Splash;
-            currentstate2 = states.Splash;
-	    score = 0;
             $(`#button_back${ID}`).remove();
             $('#statsWindow').remove();
             $('#app').fadeIn();
+            $('.menu').fadeIn();
         }));
 
     builder.appendInto(document.body);
@@ -77,6 +84,7 @@ function backBtn(builder, element) {
             $(element).fadeOut();
             $(`#button_back${ID}`).fadeOut();
             setTimeout(() => {
+                reset();
                 $(`#button_back${ID}`).remove();
                 $('.menuGame').fadeIn();
                 $(element).remove();

@@ -10,6 +10,8 @@ function main(mySide) {
 	height = 530;
 
 	var evt = "touchstart";
+	canvas.style.border = "1px solid #000";
+	evt = "mousedown";
 
 	// listen for input event
 	document.addEventListener(evt, onpress);

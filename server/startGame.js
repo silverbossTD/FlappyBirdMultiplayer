@@ -5,6 +5,7 @@ let opponentScore = 0;
 
 function startGame2(mySide, channel) {
     $('#app').css('display', 'none');
+    $('.menuGame').fadeOut();
     main(mySide);
     setTimeout(() => {
         readyStart = true;

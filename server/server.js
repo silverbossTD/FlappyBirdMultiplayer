@@ -29,7 +29,6 @@ pubnub.addListener({
                         mySide = 0;
                     }
                 }
-                $('.menuGame').fadeOut();
                 startGame2(mySide, event.channel);
             }
         }
